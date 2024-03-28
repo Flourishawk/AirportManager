@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using AirportManager.Views;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,12 @@ namespace AirportManager
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void LoginBtn_Click(object sender, RoutedEventArgs e)
+        {
+            EmployeeView employeeView = new EmployeeView();
+            employeeView.Show();
         }
     }
 }

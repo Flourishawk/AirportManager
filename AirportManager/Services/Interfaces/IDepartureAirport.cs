@@ -1,8 +1,8 @@
 ﻿using AirportManager.Models;
 
-namespace Airport.Services.Interfaces
+namespace AirportManager.Services.Interfaces
 {
-    internal interface IFlightService
+    internal interface IDepartureAirport
     {
         List<Flight> GetAlFlight();
         void AddFlight(Flight flight);

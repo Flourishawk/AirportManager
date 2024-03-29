@@ -15,7 +15,7 @@ public partial class AirportConstruction
 
     public virtual AirportLocation Location { get; set; } = null!;
 
-    public virtual ICollection<Flight> Flights { get; set; } = new List<Flight>();
+    public virtual ICollection<ArrivalAirport> ArrivalAirports { get; set; } = new List<ArrivalAirport>();
 
-    public virtual ICollection<Flight> FlightsNavigation { get; set; } = new List<Flight>();
+    public virtual ICollection<DepartureAirport> DepartureAirports { get; set; } = new List<DepartureAirport>();
 }

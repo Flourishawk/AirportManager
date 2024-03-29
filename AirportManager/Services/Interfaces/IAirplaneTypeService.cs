@@ -4,9 +4,9 @@ namespace Airport.Services.Interfaces
 {
     internal interface IAirplaneTypeService
     {
-        List<AirplaneType> GetAllAirplaneType();
+        List<AirplaneType> GetAllAirplaneTypes();
         void AddAirplaneType(AirplaneType airplaneType);
-        void UpdateAirplaneType(AirplaneType airplaneTypeBeforeCnhages, string description);
+        void UpdateAirplaneType(AirplaneType airplaneTypeBeforeChanges, string description);
         void DeleteAirplaneType(AirplaneType airplaneType);
     }
 }

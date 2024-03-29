@@ -4,9 +4,9 @@ namespace Airport.Services.Interfaces
 {
     internal interface IFlightService
     {
-        List<Flight> GetAllFlight();
+        List<Flight> GetAllFlights();
         void AddFlight(Flight flight);
-        void UpdateFlight(Flight flight, DateTime departureTime, DateTime arrivalTime, int airlineId);
+        void UpdateFlight(Flight flightBeforeChanges, DateTime departureTime, DateTime arrivalTime, int airlineId);
         void DeleteFlight(Flight flight);
     }
 }

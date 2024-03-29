@@ -1,27 +1,26 @@
 ﻿using AirportManager.Models;
 using Airport.Services.Interfaces;
-using System.Linq;
 
 namespace Airport.Services.Implementations
 {
-    internal class AirlineService
+    internal class AirlineService : IAirlineService
     {
-        public void AddAirline(Airline airlane)
+        public void AddAirline(Airline airline)
         {
             using AirportdbContext db = new();
-            bool checkIfExist = db.Airlines.Any(e1 => e1.AirlineId == airlane.AirlineId);
+            bool checkIfExist = db.Airlines.Any(e1 => e1.AirlineId == airline.AirlineId);
             if (!checkIfExist)
             {
-                db.Airlines.Add(airlane);
+                db.Airlines.Add(airline);
                 db.SaveChanges();
 
             }
         }
 
-        public void UpdateAirline(Airline airlaneBeforeChanges, string description)
+        public void UpdateAirline(Airline airlineBeforeChanges, string description)
         {
             using AirportdbContext db = new();
-            Airline? airline = db.Airlines.FirstOrDefault(a => a.AirlineId == airlaneBeforeChanges.AirlineId);
+            Airline? airline = db.Airlines.FirstOrDefault(a => a.AirlineId == airlineBeforeChanges.AirlineId);
             if (airline != null)
             {
                 airline.Description = description;
@@ -29,18 +28,18 @@ namespace Airport.Services.Implementations
             db.SaveChanges();
         }
 
-        public void DeleteAirline(Airline airlane)
+        public void DeleteAirline(Airline airline)
         {
             using AirportdbContext db = new();
-            db.Airlines.Remove(airlane);
+            db.Airlines.Remove(airline);
             db.SaveChanges();
         }
 
         public List<Airline> GetAllAirlines()
         {
             using AirportdbContext db = new();
-            var allAirport = db.Airlines.ToList();
-            return allAirport;
+            var allAirlines = db.Airlines.ToList();
+            return allAirlines;
         }
     }
 }

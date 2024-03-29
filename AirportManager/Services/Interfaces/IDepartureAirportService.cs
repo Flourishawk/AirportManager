@@ -2,11 +2,11 @@
 
 namespace AirportManager.Services.Interfaces
 {
-    internal interface IDepartureAirport
+    internal interface IDepartureAirportService
     {
-        List<DepartureAirport> GetAllDepartureAirport();
+        List<DepartureAirport> GetAllDepartureAirports();
         void AddDepartureAirport(DepartureAirport departureAirport);
-        void UpdateDepartureAirport(DepartureAirport departureAirportBeforeChanges, );
+        void UpdateDepartureAirport(DepartureAirport departureAirportBeforeChanges, int flightId, int airportId);
         void DeleteDepartureAirport(DepartureAirport departureAirport);
     }
 }

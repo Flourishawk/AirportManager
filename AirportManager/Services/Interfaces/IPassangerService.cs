@@ -4,9 +4,8 @@ namespace AirportManager.Services.Interfaces
 {
     internal interface IPassangerService
     {
-        List<Passanger> GetAllPassanger();
+        List<Passanger> GetAllPassangers();
         void AddPassanger(Passanger passanger);
-        void UpdatePassanger(Passanger passanger, );
         void DeletePassanger(Passanger passanger);
     }
 }

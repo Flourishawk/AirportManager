@@ -4,9 +4,9 @@ namespace AirportManager.Services.Interfaces
 {
     internal interface IArrivalAirportService
     {
-        List<ArrivalAirport> GetAllArrivalAirport();
-        void AddArrivalAirport(ArrivalAirport airportConstruction);
-        void UpdateArrivalAirport(ArrivalAirport arrivalAirportBeforeChanges,);
-        void DeleteArrivalAirport(ArrivalAirport airportConstruction);
+        List<ArrivalAirport> GetAllArrivalAirports();
+        void AddArrivalAirport(ArrivalAirport arrivalAirport);
+        void UpdateArrivalAirport(ArrivalAirport arrivalAirportBeforeChanges, int flightId, int airportId);
+        void DeleteArrivalAirport(ArrivalAirport arrivalAirport);
     }
 }

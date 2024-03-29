@@ -1,4 +1,7 @@
-﻿namespace AirportManager.Models;
+﻿using System;
+using System.Collections.Generic;
+
+namespace AirportManager.Models;
 
 public partial class Flight
 {
@@ -12,7 +15,7 @@ public partial class Flight
 
     public virtual Airline Airline { get; set; } = null!;
 
-    public virtual ICollection<ArrivalAirport> ArrivalAirports { get; set; } = new List<ArrivalAirport>();
+    public virtual ArrivalAirport? ArrivalAirport { get; set; }
 
-    public virtual ICollection<DepartureAirport> DepartureAirports { get; set; } = new List<DepartureAirport>();
+    public virtual DepartureAirport? DepartureAirport { get; set; }
 }

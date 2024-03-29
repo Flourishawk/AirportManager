@@ -8,7 +8,7 @@ namespace Airport.Services.Implementations
         public void AddAirplane(Airplane airplane)
         {
             using AirportdbContext db = new();
-            bool checkIfExist = db.Airplanes.Any(e1 => e1.AirlineId == airplane.AirlineId);
+            bool checkIfExist = db.Airplanes.Any(e1 => e1.AirplaneId == airplane.AirplaneId);
             if (!checkIfExist)
             {
                 db.Airplanes.Add(airplane);

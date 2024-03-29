@@ -32,7 +32,7 @@ public partial class AirportdbContext : DbContext
 
     public virtual DbSet<Department> Departments { get; set; }
 
-    public virtual DbSet<DepartureAirport> DepartureAirport { get; set; }
+    public virtual DbSet<DepartureAirport> DepartureAirports { get; set; }
 
     public virtual DbSet<Employee> Employees { get; set; }
 
@@ -72,9 +72,7 @@ public partial class AirportdbContext : DbContext
 
         modelBuilder.Entity<Airplane>(entity =>
         {
-            entity.HasKey(e => new { e.AirplaneId, e.AirlineId, e.AirplaneTypeId })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0 });
+            entity.HasKey(e => e.AirplaneId).HasName("PRIMARY");
 
             entity.ToTable("airplane");
 
@@ -86,7 +84,9 @@ public partial class AirportdbContext : DbContext
 
             entity.HasIndex(e => e.CapacityId, "fk_airplane_capacity1_idx");
 
-            entity.Property(e => e.AirplaneId).HasColumnName("airplane_id");
+            entity.Property(e => e.AirplaneId)
+                .ValueGeneratedNever()
+                .HasColumnName("airplane_id");
             entity.Property(e => e.AirlineId).HasColumnName("airline_id");
             entity.Property(e => e.AirplaneTypeId).HasColumnName("airplane_type_id");
             entity.Property(e => e.CapacityId).HasColumnName("capacity_id");
@@ -123,9 +123,7 @@ public partial class AirportdbContext : DbContext
 
         modelBuilder.Entity<AirportConstruction>(entity =>
         {
-            entity.HasKey(e => new { e.AirportId, e.LocationId, e.AirlineId })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0, 0 });
+            entity.HasKey(e => e.AirportId).HasName("PRIMARY");
 
             entity.ToTable("airport_construction");
 
@@ -135,9 +133,11 @@ public partial class AirportdbContext : DbContext
 
             entity.HasIndex(e => e.LocationId, "fk_airport_airport_location1_idx");
 
-            entity.Property(e => e.AirportId).HasColumnName("airport_id");
-            entity.Property(e => e.LocationId).HasColumnName("location_id");
+            entity.Property(e => e.AirportId)
+                .ValueGeneratedNever()
+                .HasColumnName("airport_id");
             entity.Property(e => e.AirlineId).HasColumnName("airline_id");
+            entity.Property(e => e.LocationId).HasColumnName("location_id");
 
             entity.HasOne(d => d.Airline).WithMany(p => p.AirportConstructions)
                 .HasForeignKey(d => d.AirlineId)
@@ -173,6 +173,32 @@ public partial class AirportdbContext : DbContext
                 .HasColumnName("longtitude");
         });
 
+        modelBuilder.Entity<ArrivalAirport>(entity =>
+        {
+            entity.HasKey(e => new { e.FlightId, e.AirportId })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+            entity.ToTable("arrival_airport");
+
+            entity.HasIndex(e => e.AirportId, "fk_arrival_airport_airport1");
+
+            entity.HasIndex(e => e.FlightId, "fk_arrival_airport_flight1_idx").IsUnique();
+
+            entity.Property(e => e.FlightId).HasColumnName("flight_id");
+            entity.Property(e => e.AirportId).HasColumnName("airport_id");
+
+            entity.HasOne(d => d.Airport).WithMany(p => p.ArrivalAirports)
+                .HasForeignKey(d => d.AirportId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_arrival_airport_airport1");
+
+            entity.HasOne(d => d.Flight).WithOne(p => p.ArrivalAirport)
+                .HasForeignKey<ArrivalAirport>(d => d.FlightId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_arrival_airport_flight1");
+        });
+
         modelBuilder.Entity<Capacity>(entity =>
         {
             entity.HasKey(e => e.CapacityId).HasName("PRIMARY");
@@ -197,6 +223,32 @@ public partial class AirportdbContext : DbContext
             entity.Property(e => e.Description)
                 .HasMaxLength(45)
                 .HasColumnName("description");
+        });
+
+        modelBuilder.Entity<DepartureAirport>(entity =>
+        {
+            entity.HasKey(e => new { e.FlightId, e.AirportId })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+            entity.ToTable("departure_airport");
+
+            entity.HasIndex(e => e.AirportId, "fk_direction_airport2_idx");
+
+            entity.HasIndex(e => e.FlightId, "fk_flight_has_airport_location_flight1_idx").IsUnique();
+
+            entity.Property(e => e.FlightId).HasColumnName("flight_id");
+            entity.Property(e => e.AirportId).HasColumnName("airport_id");
+
+            entity.HasOne(d => d.Airport).WithMany(p => p.DepartureAirports)
+                .HasForeignKey(d => d.AirportId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_direction_airport2");
+
+            entity.HasOne(d => d.Flight).WithOne(p => p.DepartureAirport)
+                .HasForeignKey<DepartureAirport>(d => d.FlightId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_flight_has_airport_location_flight1");
         });
 
         modelBuilder.Entity<Employee>(entity =>
@@ -225,7 +277,6 @@ public partial class AirportdbContext : DbContext
                 .HasColumnName("username");
 
             entity.HasOne(d => d.Airplane).WithMany(p => p.Employees)
-                .HasPrincipalKey(p => p.AirplaneId)
                 .HasForeignKey(d => d.AirplaneId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_employee_airplane1");
@@ -238,9 +289,7 @@ public partial class AirportdbContext : DbContext
 
         modelBuilder.Entity<Flight>(entity =>
         {
-            entity.HasKey(e => new { e.FlightId, e.AirlineId })
-                .HasName("PRIMARY")
-                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+            entity.HasKey(e => e.FlightId).HasName("PRIMARY");
 
             entity.ToTable("flight");
 
@@ -248,7 +297,9 @@ public partial class AirportdbContext : DbContext
 
             entity.HasIndex(e => e.FlightId, "flight_id_UNIQUE").IsUnique();
 
-            entity.Property(e => e.FlightId).HasColumnName("flight_id");
+            entity.Property(e => e.FlightId)
+                .ValueGeneratedNever()
+                .HasColumnName("flight_id");
             entity.Property(e => e.AirlineId).HasColumnName("airline_id");
             entity.Property(e => e.ArrivalTime)
                 .HasColumnType("timestamp")
@@ -357,39 +408,6 @@ public partial class AirportdbContext : DbContext
             entity.HasOne(d => d.Passanger).WithMany(p => p.Tickets)
                 .HasForeignKey(d => d.PassangerId)
                 .HasConstraintName("fk_ticket_passanger1");
-        });
-
-        modelBuilder.Entity<ArrivalAirport>(entity =>
-        {
-            entity.HasKey(aa => new { aa.FlightId, aa.AirportId });
-            entity.ToTable("arrivalAirport");
-
-            entity.HasOne(d => d.Flight).WithMany(p => p.ArrivalAirports)
-                .HasForeignKey(d => d.FlightId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_arrival_airport_flight1");
-
-            entity.HasOne(d => d.AirportConstruction).WithMany(p => p.ArrivalAirports)
-                .HasForeignKey(d => d.AirportId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_arrival_airport_airport1");
-
-        });
-
-        modelBuilder.Entity<DepartureAirport>(entity =>
-        {
-            entity.HasKey(aa => new { aa.FlightId, aa.AirportId });
-            entity.ToTable("departureAirport");
-
-            entity.HasOne(d => d.Flight).WithMany(p => p.DepartureAirports)
-                .HasForeignKey(d => d.FlightId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_departure_airport_flight1");
-
-            entity.HasOne(d => d.AirportConstruction).WithMany(p => p.DepartureAirports)
-                .HasForeignKey(d => d.AirportId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_departure_airport_airport1");
         });
 
         OnModelCreatingPartial(modelBuilder);

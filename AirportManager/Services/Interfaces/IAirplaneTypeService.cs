@@ -6,7 +6,7 @@ namespace Airport.Services.Interfaces
     {
         List<AirplaneType> GetAllAirplaneType();
         void AddAirplaneType(AirplaneType airplaneType);
-        void UpdateAirplaneType(AirplaneType airplaneType, string description);
+        void UpdateAirplaneType(AirplaneType airplaneTypeBeforeCnhages, string description);
         void DeleteAirplaneType(AirplaneType airplaneType);
     }
 }

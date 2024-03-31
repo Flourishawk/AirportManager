@@ -5,60 +5,374 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirportManager.Views" xmlns:viewmodels="clr-namespace:AirportManager.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:EmployeeVM}"
         mc:Ignorable="d"
-        Title="EmployeeView" Height="450" Width="800">
+        Title="EmployeeView" Height="450" Width="1075">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <TabControl Grid.Row="0" SelectedItem="{Binding SelectedTabItem}">
-            <TabItem Name="UsersTab">
+        <TabControl x:Name="MainTab" Grid.Row="0" SelectedItem="{Binding SelectedTabItem}">
+
+            <TabItem x:Name="AirlineTab">
                 <TabItem.Header>
                     <TextBlock Text="Airline"/>
                 </TabItem.Header>
-                <!--
-                <TabItem.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Редагувати" Command="{Binding OpenEditItemWnd}"/>
-                        <MenuItem Header="Видалити" Command="{Binding DeleteItem}"/>
-                    </ContextMenu>
-                </TabItem.ContextMenu>
-                -->
-                <ListView x:Name="ViewAllUsers" ItemsSource="{Binding AllAirlines}"
-                          SelectedItem="{Binding SelectedUser}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Id"                                            
-                                            DisplayMemberBinding="{Binding Path=AirlineId}"/>
-                            <GridViewColumn Header="Description"
-                                            DisplayMemberBinding="{Binding Path=Description}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="AirlineTabAirlineIdText" Margin="5,3,3,3" Width="50"/>
+                        <TextBox x:Name="AirlineTabDescriptionText" Margin="0,3,3,3" Width="250"/>
+                    </StackPanel>
+                    <ListView x:Name="ViewAllAirlines" ItemsSource="{Binding AllAirlines}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="AirlineId" DisplayMemberBinding="{Binding AirlineId}" Width="50"/>
+                                <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="250"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
             </TabItem>
-            <TabItem Name="AirplaneTab">
+
+            <TabItem x:Name="AirplaneTab">
                 <TabItem.Header>
                     <TextBlock Text="Airplane"/>
                 </TabItem.Header>
-                <ListView x:Name="ViewAllAirplane" ItemsSource="{Binding AllAirlines}"
-              SelectedItem="{Binding SelectedUser}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox x:Name="AirlaneTabAirlineIdText" Margin="5,3,3,3" Width="75"/>
+                            <TextBox x:Name="AirplaneTabAirlineIdText" Margin="0,3,3,3" Width="50"/>
+                            <TextBox x:Name="AirplaneTabAirplaneTypeIdText" Margin="0,3,3,3" Width="100"/>
+                            <TextBox x:Name="AirplaneTabCapacityIdText" Margin="0,3,3,3" Width="75"/>
+                    </StackPanel>
+                        <ListView x:Name="ViewAllAirplanes" ItemsSource="{Binding AllAirplanes}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="AirplaneId" DisplayMemberBinding="{Binding AirplaneId}" Width="75"/>
+                                <GridViewColumn Header="AirlineId" DisplayMemberBinding="{Binding AirlineId}" Width="50"/>
+                                <GridViewColumn Header="AirplaneTypeId" DisplayMemberBinding="{Binding AirplaneTypeId}" Width="100"/>
+                                <GridViewColumn Header="CapacityId" DisplayMemberBinding="{Binding CapacityId}" Width="75"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem x:Name="AirplaneTypeTab">
+                <TabItem.Header>
+                    <TextBlock Text="AirplaneType"/>
+                </TabItem.Header>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="AirplaneTypeTabAirplaneTypeIdText" Margin="5,3,3,3" Width="50"/>
+                        <TextBox x:Name="AirplaneTypeTabDescriptionText" Margin="0,3,3,3" Width="100"/>
+                    </StackPanel>
+                    <ListView x:Name="ViewAllAirplaneType" ItemsSource="{Binding AllAirplaneTypes}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Id"                                            
-                                DisplayMemberBinding="{Binding Path=AirlineId}"/>
-                            <GridViewColumn Header="Description"
-                                DisplayMemberBinding="{Binding Path=Description}"/>
+                                <GridViewColumn Header="AirplaneTypeId" DisplayMemberBinding="{Binding AirplaneTypeId}" Width="50"/>
+                                <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="100"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
+                </StackPanel>
             </TabItem>
-            <!--<StackPanel Grid.Row="1" Orientation="Horizontal"
-                    HorizontalAlignment="Right">
-            <Button Content="Новый сотрудник" Command="{Binding OpenAddNewUserWnd}"/>
-            <Button Content="Новая позиция" Command="{Binding OpenAddNewPositionWnd}"/>
-            <Button Content="Новый отдел" Command="{Binding OpenAddNewDepartmentWnd}"/>
-        </StackPanel>*/
-        -->
-            </TabControl>
+
+            <TabItem x:Name="AirportConstructionTab">
+                <TabItem.Header>
+                    <TextBlock Text="AirportConstruction"/>
+                </TabItem.Header>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="AirportConstructionTabAirportIdText" Margin="5,3,3,3" Width="75"/>
+                        <TextBox x:Name="AirportConstructionTabLocationIdText" Margin="0,3,3,3" Width="75"/>
+                        <TextBox x:Name="AirportConstructionTabAirlineIdText" Margin="0,3,3,3" Width="75"/>
+                    </StackPanel>
+                    <ListView x:Name="ViewAllAirportConstruction" ItemsSource="{Binding AllAirportConstructions}"
+                    SelectedItem="{Binding SelectedUser}">
+                    <ListView.View>
+                        <GridView>
+                                <GridViewColumn Header="AirportId" DisplayMemberBinding="{Binding AirportId}" Width="75"/>
+                                <GridViewColumn Header="LocationId" DisplayMemberBinding="{Binding LocationId}" Width="75"/>
+                                <GridViewColumn Header="AirlineId" DisplayMemberBinding="{Binding AirlineId}" Width="75"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem x:Name="AirportLocationTab">
+                <TabItem.Header>
+                    <TextBlock Text="AirportLocation"/>
+                </TabItem.Header>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="AirportLocationTabLocationIdText" Margin="5,3,3,3" Width="75"/>
+                        <TextBox x:Name="AirportLocationTabCountryText" Margin="0,3,3,3" Width="150"/>
+                        <TextBox x:Name="AirportLocationTabCityText" Margin="0,3,3,3" Width="150"/>
+                        <TextBox x:Name="AirportLocationTabLatitudeText" Margin="0,3,3,3" Width="75"/>
+                        <TextBox x:Name="AirportLocationTabLongtitudeText" Margin="0,3,3,3" Width="75"/>
+                    </StackPanel>
+                    <ListView x:Name="ViewAllAirportLocations" ItemsSource="{Binding AllAirportLocations}"
+                    SelectedItem="{Binding SelectedUser}">
+                    <ListView.View>
+                        <GridView>
+                                <GridViewColumn Header="LocationId" DisplayMemberBinding="{Binding LocationId}" Width="75"/>
+                                <GridViewColumn Header="Country" DisplayMemberBinding="{Binding Country}" Width="150"/>
+                                <GridViewColumn Header="City" DisplayMemberBinding="{Binding City}" Width="150"/>
+                                <GridViewColumn Header="Latitude" DisplayMemberBinding="{Binding Latitude}" Width="75"/>
+                                <GridViewColumn Header="Longtitude" DisplayMemberBinding="{Binding Longtitude}" Width="75"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem x:Name="ArrivalAirportTab">
+                <TabItem.Header>
+                    <TextBlock Text="AirportLocation"/>
+                </TabItem.Header>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="ArrivalAirportTabFlightIdText" Margin="5,3,3,3" Width="75"/>
+                        <TextBox x:Name="ArrivalAirportTabAirportIdText" Margin="0,3,3,3" Width="75"/>
+                    </StackPanel>
+                    <ListView x:Name="ViewAllArrivalAirports" ItemsSource="{Binding AllArrivalAirports}"
+                    SelectedItem="{Binding SelectedUser}">
+                    <ListView.View>
+                        <GridView>
+                                <GridViewColumn Header="FlightId" DisplayMemberBinding="{Binding FlightId}" Width="75"/>
+                                <GridViewColumn Header="AirportId" DisplayMemberBinding="{Binding AirportId}" Width="75"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem x:Name="CapacityTab">
+                <TabItem.Header>
+                    <TextBlock Text="Capacity"/>
+                </TabItem.Header>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="CapacityTabCapacityIdText" Margin="5,3,3,3" Width="75"/>
+                        <TextBox x:Name="CapacityTabDescriptionText" Margin="0,3,3,3" Width="150"/>
+                    </StackPanel>
+                    <ListView x:Name="ViewAllCapacities" ItemsSource="{Binding AllCapacities}"
+                    SelectedItem="{Binding SelectedUser}">
+                    <ListView.View>
+                        <GridView>
+                                <GridViewColumn Header="CapacityId" DisplayMemberBinding="{Binding CapacityId}" Width="75"/>
+                                <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="150"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem x:Name="DepartmentTab">
+                <TabItem.Header>
+                    <TextBlock Text="Department"/>
+                </TabItem.Header>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="DepartmentTabDepartmentIdText" Margin="5,3,3,3" Width="100"/>
+                        <TextBox x:Name="DepartmentTabDescriptionText" Margin="0,3,3,3" Width="150"/>
+                    </StackPanel>
+                    <ListView x:Name="ViewAllDepartments" ItemsSource="{Binding AllDepartments}"
+                    SelectedItem="{Binding SelectedUser}">
+                    <ListView.View>
+                        <GridView>
+                                <GridViewColumn Header="DepartmentId" DisplayMemberBinding="{Binding DepartmentId}" Width="100"/>
+                                <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="150"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem x:Name="DepartureAirportTab">
+                <TabItem.Header>
+                    <TextBlock Text="DepartureAirports"/>
+                </TabItem.Header>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="DepartureAirportTabFlightIdText" Margin="5,3,3,3" Width="75"/>
+                        <TextBox x:Name="DepartureAirportTabAirportIdText" Margin="0,3,3,3" Width="75"/>
+                    </StackPanel>
+                    <ListView x:Name="ViewAllDepartureAirports" ItemsSource="{Binding AllDepartureAirports}"
+                    SelectedItem="{Binding SelectedUser}">
+                    <ListView.View>
+                        <GridView>
+                                <GridViewColumn Header="FlightId" DisplayMemberBinding="{Binding FlightId}" Width="75"/>
+                                <GridViewColumn Header="AirportId" DisplayMemberBinding="{Binding AirportId}" Width="75"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem x:Name="EmployeeTab">
+                <TabItem.Header>
+                    <TextBlock Text="Employees"/>
+                </TabItem.Header>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="EmployeeTabEmployeeIdText" Margin="5,3,3,3" Width="75"/>
+                        <TextBox x:Name="EmployeeTabSalaryText" Margin="0,3,3,3" Width="75"/>
+                        <TextBox x:Name="EmployeeTabUsernameText" Margin="0,3,3,3" Width="75"/>
+                        <TextBox x:Name="EmployeeTabAirplaneIdText" Margin="0,3,3,3" Width="75"/>
+                        <TextBox x:Name="EmployeeTabDepartmentIdText" Margin="0,3,3,3" Width="150"/>
+                    </StackPanel>
+                    <ListView x:Name="ViewAllEmployees" ItemsSource="{Binding AllEmployees}"
+                    SelectedItem="{Binding SelectedUser}">
+                    <ListView.View>
+                        <GridView>
+                                <GridViewColumn Header="EmployeeId" DisplayMemberBinding="{Binding EmployeeId}" Width="75"/>
+                                <GridViewColumn Header="Salary" DisplayMemberBinding="{Binding Salary}" Width="75"/>
+                                <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Username}" Width="75"/>
+                                <GridViewColumn Header="AirplaneId" DisplayMemberBinding="{Binding AirplaneId}" Width="75"/>
+                                <GridViewColumn Header="DepartmentId" DisplayMemberBinding="{Binding DepartmentId}" Width="150"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem x:Name="FlightTab">
+                <TabItem.Header>
+                    <TextBlock Text="Flights"/>
+                </TabItem.Header>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="FlightTabFlightIdText" Margin="5,3,3,3" Width="75"/>
+                        <TextBox x:Name="FlightTabDepartureTimeText" Margin="0,3,3,3" Width="150"/>
+                        <TextBox x:Name="FlightTabArrivalTimeText" Margin="0,3,3,3" Width="150"/>
+                        <TextBox x:Name="FlightTabAirlineIdText" Margin="0,3,3,3" Width="75"/>
+                    </StackPanel>
+                    <ListView x:Name="ViewAllFlights" ItemsSource="{Binding AllFlights}"
+                    SelectedItem="{Binding SelectedUser}">
+                    <ListView.View>
+                        <GridView>
+                                <GridViewColumn Header="FlightId" DisplayMemberBinding="{Binding FlightId}" Width="75"/>
+                                <GridViewColumn Header="DepartureTime" DisplayMemberBinding="{Binding DepartureTime}" Width="150"/>
+                                <GridViewColumn Header="ArrivalTime" DisplayMemberBinding="{Binding ArrivalTime}" Width="150"/>
+                                <GridViewColumn Header="AirlineId" DisplayMemberBinding="{Binding AirlineId}" Width="75"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem x:Name="GenderTab">
+                <TabItem.Header>
+                    <TextBlock Text="Genders"/>
+                </TabItem.Header>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="GenderTabGenderIdText" Margin="5,3,3,3" Width="75"/>
+                        <TextBox x:Name="GenderTabGenderNameText" Margin="0,3,3,3" Width="150"/>
+                    </StackPanel>
+                    <ListView x:Name="ViewAllGenders" ItemsSource="{Binding AllGenders}"
+                    SelectedItem="{Binding SelectedUser}">
+                    <ListView.View>
+                        <GridView>
+                                <GridViewColumn Header="GenderId" DisplayMemberBinding="{Binding GenderId}" Width="75"/>
+                                <GridViewColumn Header="GenderName" DisplayMemberBinding="{Binding GenderName}" Width="150"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem x:Name="HumanTab">
+                <TabItem.Header>
+                    <TextBlock Text="Humans"/>
+                </TabItem.Header>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="HumanTabHumanIdText" Margin="5,3,3,3" Width="75"/>
+                        <TextBox x:Name="HumanTabNameText" Margin="0,3,3,3" Width="150"/>
+                        <TextBox x:Name="HumanTabSurnameText" Margin="0,3,3,3" Width="150"/>
+                        <TextBox x:Name="HumanTabEmailText" Margin="0,3,3,3" Width="150"/>
+                        <TextBox x:Name="HumanTabTelephoneText" Margin="0,3,3,3" Width="150"/>
+                        <TextBox x:Name="HumanTabBirthdateText" Margin="0,3,3,3" Width="150"/>
+                        <TextBox x:Name="HumanTabGenderIdText" Margin="0,3,3,3" Width="75"/>
+                        <TextBox x:Name="HumanTabPassangerIdText" Margin="0,3,3,3" Width="75"/>
+                        <TextBox x:Name="HumanTabEmployeeId" Margin="0,3,3,3" Width="75"/>
+                    </StackPanel>
+                    <ListView x:Name="ViewAllHumans" ItemsSource="{Binding AllHumans}"
+                    SelectedItem="{Binding SelectedUser}">
+                    <ListView.View>
+                        <GridView>
+                                <GridViewColumn Header="HumanId" DisplayMemberBinding="{Binding HumanId}" Width="75"/>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                                <GridViewColumn Header="Surname" DisplayMemberBinding="{Binding Surname}" Width="150"/>
+                                <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}" Width="150"/>
+                                <GridViewColumn Header="Telephone" DisplayMemberBinding="{Binding Telephone}" Width="150"/>
+                                <GridViewColumn Header="Birthdate" DisplayMemberBinding="{Binding Birthdate}" Width="150"/>
+                                <GridViewColumn Header="GenderId" DisplayMemberBinding="{Binding GenderId}" Width="75"/>
+                                <GridViewColumn Header="PassangerId" DisplayMemberBinding="{Binding PassangerId}" Width="75"/>
+                                <GridViewColumn Header="EmployeeId" DisplayMemberBinding="{Binding EmployeeId}" Width="75"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem x:Name="PassangerTab">
+                <TabItem.Header>
+                    <TextBlock Text="Passangers"/>
+                </TabItem.Header>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="PassangerTabPassangerIdText" Margin="5,3,3,3" Width="75"/>
+                    </StackPanel>
+                    <ListView x:Name="ViewAllPassangers" ItemsSource="{Binding AllPassangers}"
+                    SelectedItem="{Binding SelectedUser}">
+                    <ListView.View>
+                        <GridView>
+                                <GridViewColumn Header="PassangerId" DisplayMemberBinding="{Binding PassangerId}" Width="75"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem x:Name="TicketTab">
+                <TabItem.Header>
+                    <TextBlock Text="Tickets"/>
+                </TabItem.Header>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="TicketTabTicketIdText" Margin="5,3,3,3" Width="75"/>
+                        <TextBox x:Name="TicketTabDepartureTimeText" Margin="0,3,3,3" Width="150"/>
+                        <TextBox x:Name="TicketTabPurchaseTimeText" Margin="0,3,3,3" Width="150"/>
+                        <TextBox x:Name="TicketTabExpirationTimeText" Margin="0,3,3,3" Width="150"/>
+                        <TextBox x:Name="TicketTabSeatText" Margin="0,3,3,3" Width="75"/>
+                        <TextBox x:Name="TicketTabPassangerIdText" Margin="0,3,3,3" Width="75"/>
+                    </StackPanel>
+                    <ListView x:Name="ViewAllTickets" ItemsSource="{Binding AllTickets}"
+                    SelectedItem="{Binding SelectedUser}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="TicketId" DisplayMemberBinding="{Binding TicketId}" Width="75"/>
+                                <GridViewColumn Header="DepartureTime" DisplayMemberBinding="{Binding DepartureTime}" Width="150"/>
+                                <GridViewColumn Header="PurchaseTime" DisplayMemberBinding="{Binding PurchaseTime}" Width="150"/>
+                                <GridViewColumn Header="ExpirationTime" DisplayMemberBinding="{Binding ExpirationTime}" Width="150"/>
+                                <GridViewColumn Header="Seat" DisplayMemberBinding="{Binding Seat}" Width="75"/>
+                                <GridViewColumn Header="PassangerId" DisplayMemberBinding="{Binding PassangerId}" Width="75"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+        <Button Content="Пошук" HorizontalAlignment="Left" Margin="26,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78"/>
+        <Button Content="Додати" HorizontalAlignment="Left" Margin="120,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78" Click="Button_Click_1"/>
+        <Button Content="Видалити" HorizontalAlignment="Left" Margin="216,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78" Click="Button_Click"/>
+        <Button Content="Оновити" HorizontalAlignment="Left" Margin="322,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78"/>
+
+
     </Grid>
 </Window>

@@ -1,7 +1,7 @@
 ﻿using AirportManager.Models;
 using Airport.Services.Interfaces;
 
-namespace Airport.Services.Implementations
+namespace AirportManager.Services.Implementations
 {
     internal class AirlineService : IAirlineService
     {

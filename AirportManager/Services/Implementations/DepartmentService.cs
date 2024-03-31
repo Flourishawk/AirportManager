@@ -40,5 +40,11 @@ namespace AirportManager.Services.Implementations
             var allDepartments = db.Departments.ToList();
             return allDepartments;
         }
+
+        public Department GetDepartmentsById(int departmentId)
+        {
+            using AirportdbContext db = new();
+            return db.Departments.FirstOrDefault(a => a.DepartmentId == departmentId);
+        }
     }
 }

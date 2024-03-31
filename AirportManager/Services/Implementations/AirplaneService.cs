@@ -42,5 +42,11 @@ namespace Airport.Services.Implementations
             var allAirplanes = db.Airplanes.ToList();
             return allAirplanes;
         }
+
+        public Airplane GetAirplaneById(int airplaneId)
+        {
+            using AirportdbContext db = new();
+            return db.Airplanes.FirstOrDefault(a => a.AirplaneId == airplaneId);
+        }
     }
 }

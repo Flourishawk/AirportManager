@@ -40,5 +40,11 @@ namespace AirportManager.Services.Implementations
             var allGenders = db.Genders.ToList();
             return allGenders;
         }
+
+        public Gender GetGenderById(int genderId)
+        {
+            using AirportdbContext db = new();
+            return db.Genders.FirstOrDefault(a => a.GenderId == genderId);
+        }
     }
 }

@@ -44,5 +44,10 @@ namespace AirportManager.Services.Implementations
             var allEmployees = db.Employees.ToList();
             return allEmployees;
         }
+        public Employee GetEmployeeById(int employeeId)
+        {
+            using AirportdbContext db = new();
+            return db.Employees.FirstOrDefault(a => a.EmployeeId == employeeId);
+        }
     }
 }

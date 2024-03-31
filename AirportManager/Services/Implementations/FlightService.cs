@@ -42,5 +42,11 @@ namespace AirportManager.Services.Implementations
             var allFlights = db.Flights.ToList();
             return allFlights;
         }
+
+        public Flight GetFlightById(int flightId)
+        {
+            using AirportdbContext db = new();
+            return db.Flights.FirstOrDefault(a => a.FlightId == flightId);
+        }
     }
 }

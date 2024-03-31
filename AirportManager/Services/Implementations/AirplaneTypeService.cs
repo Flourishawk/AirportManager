@@ -41,5 +41,11 @@ namespace AirportManager.Services.Implementations
             return allAirplaneTypes;
         }
 
+        public AirplaneType GetAirplaneTypeById(int airplaneTypeId)
+        {
+            using AirportdbContext db = new();
+            return db.AirplaneTypes.FirstOrDefault(a => a.AirplaneTypeId == airplaneTypeId);
+        }
+
     }
 }

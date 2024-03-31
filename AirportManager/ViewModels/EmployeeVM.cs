@@ -1,13 +1,11 @@
 ﻿using Airport.Services.Implementations;
 using AirportManager.Models;
 using AirportManager.Services.Implementations;
-using AirportManager.ViewModels;
 
 namespace AirportManager.ViewModels
 {
     internal class EmployeeVM : ViewModelBase
     {
-        public event EventHandler DataUpdated;
         public List<Airline> AllAirlines { get; set; }
         public List<Airplane> AllAirplanes { get; set; }
         
@@ -76,6 +74,8 @@ namespace AirportManager.ViewModels
             TicketService ticketService = new TicketService();
             AllTickets = ticketService.GetAllTickets();
 
+
+
             OnPropertyChanged("AllAirplanes");
             OnPropertyChanged("AllAirlines");
             OnPropertyChanged("AllAirlaneTypes");
@@ -91,17 +91,6 @@ namespace AirportManager.ViewModels
             OnPropertyChanged("AllHumans");
             OnPropertyChanged("AllPassangers");
             OnPropertyChanged("AllTickets");
-        }
-
-        private void UpdateData()
-        {
-            OnDataUpdated();
-        }
-
-        // Метод для сповіщення про зміни даних
-        protected virtual void OnDataUpdated()
-        {
-            DataUpdated?.Invoke(this, EventArgs.Empty);
         }
 
     }

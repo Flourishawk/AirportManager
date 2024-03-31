@@ -29,5 +29,11 @@ namespace AirportManager.Services.Implementations
             var allPassangers = db.Passangers.ToList();
             return allPassangers;
         }
+
+        public Passanger GetPassangerById(int passangerId)
+        {
+            using AirportdbContext db = new();
+            return db.Passangers.FirstOrDefault(a => a.PassangerId == passangerId);
+        }
     }
 }

@@ -41,5 +41,11 @@ namespace AirportManager.Services.Implementations
             var allDepartureAirports = db.DepartureAirports.ToList();
             return allDepartureAirports;
         }
+
+        public DepartureAirport GetDepartureAirportById(int departureAirportId)
+        {
+            using AirportdbContext db = new();
+            return db.DepartureAirports.FirstOrDefault(a => a.AirportId == departureAirportId);
+        }
     }
 }

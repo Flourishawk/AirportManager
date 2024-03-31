@@ -47,5 +47,11 @@ namespace AirportManager.Services.Implementations
             var allHumans = db.Humans.ToList();
             return allHumans;
         }
+
+        public Human GetHumanById(int humanId)
+        {
+            using AirportdbContext db = new();
+            return db.Humans.FirstOrDefault(a => a.HumanId == humanId);
+        }
     }
 }

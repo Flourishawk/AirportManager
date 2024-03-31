@@ -41,5 +41,12 @@ namespace AirportManager.Services.Implementations
             var allAirportConstructions = db.AirportConstructions.ToList();
             return allAirportConstructions;
         }
+
+        public AirportConstruction GetAirportConstructionById(int airportConstructionId)
+        {
+            using AirportdbContext db = new();
+            return db.AirportConstructions.FirstOrDefault(a => a.AirportId == airportConstructionId);
+        }
+
     }
 }

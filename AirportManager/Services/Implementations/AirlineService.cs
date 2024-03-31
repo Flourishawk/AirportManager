@@ -17,6 +17,12 @@ namespace AirportManager.Services.Implementations
             }
         }
 
+        public Airline GetAirlineById(int airlineId)
+        {
+            using AirportdbContext db = new();
+            return db.Airlines.FirstOrDefault(a => a.AirlineId == airlineId);
+        }
+
         public void UpdateAirline(Airline airlineBeforeChanges, string description)
         {
             using AirportdbContext db = new();

@@ -40,7 +40,7 @@
                 </TabItem.Header>
                     <StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBox x:Name="AirlaneTabAirlineIdText" Margin="5,3,3,3" Width="75"/>
+                            <TextBox x:Name="AirplaneTabAirplaneIdText" Margin="5,3,3,3" Width="75"/>
                             <TextBox x:Name="AirplaneTabAirlineIdText" Margin="0,3,3,3" Width="50"/>
                             <TextBox x:Name="AirplaneTabAirplaneTypeIdText" Margin="0,3,3,3" Width="100"/>
                             <TextBox x:Name="AirplaneTabCapacityIdText" Margin="0,3,3,3" Width="75"/>
@@ -67,7 +67,7 @@
                         <TextBox x:Name="AirplaneTypeTabAirplaneTypeIdText" Margin="5,3,3,3" Width="50"/>
                         <TextBox x:Name="AirplaneTypeTabDescriptionText" Margin="0,3,3,3" Width="100"/>
                     </StackPanel>
-                    <ListView x:Name="ViewAllAirplaneType" ItemsSource="{Binding AllAirplaneTypes}">
+                    <ListView x:Name="ViewAllAirplaneTypes" ItemsSource="{Binding AllAirplaneTypes}">
                     <ListView.View>
                         <GridView>
                                 <GridViewColumn Header="AirplaneTypeId" DisplayMemberBinding="{Binding AirplaneTypeId}" Width="50"/>
@@ -88,7 +88,7 @@
                         <TextBox x:Name="AirportConstructionTabLocationIdText" Margin="0,3,3,3" Width="75"/>
                         <TextBox x:Name="AirportConstructionTabAirlineIdText" Margin="0,3,3,3" Width="75"/>
                     </StackPanel>
-                    <ListView x:Name="ViewAllAirportConstruction" ItemsSource="{Binding AllAirportConstructions}"
+                    <ListView x:Name="ViewAllAirportConstructions" ItemsSource="{Binding AllAirportConstructions}"
                     SelectedItem="{Binding SelectedUser}">
                     <ListView.View>
                         <GridView>
@@ -130,7 +130,7 @@
 
             <TabItem x:Name="ArrivalAirportTab">
                 <TabItem.Header>
-                    <TextBlock Text="AirportLocation"/>
+                    <TextBlock Text="ArrivalLocation"/>
                 </TabItem.Header>
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
@@ -299,7 +299,7 @@
                         <TextBox x:Name="HumanTabBirthdateText" Margin="0,3,3,3" Width="150"/>
                         <TextBox x:Name="HumanTabGenderIdText" Margin="0,3,3,3" Width="75"/>
                         <TextBox x:Name="HumanTabPassangerIdText" Margin="0,3,3,3" Width="75"/>
-                        <TextBox x:Name="HumanTabEmployeeId" Margin="0,3,3,3" Width="75"/>
+                        <TextBox x:Name="HumanTabEmployeeIdText" Margin="0,3,3,3" Width="75"/>
                     </StackPanel>
                     <ListView x:Name="ViewAllHumans" ItemsSource="{Binding AllHumans}"
                     SelectedItem="{Binding SelectedUser}">
@@ -368,11 +368,8 @@
                 </StackPanel>
             </TabItem>
         </TabControl>
-        <Button Content="Пошук" HorizontalAlignment="Left" Margin="26,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78"/>
+        <Button Content="Пошук за Id" HorizontalAlignment="Left" Margin="26,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78" Click="Button_Click_2"/>
         <Button Content="Додати" HorizontalAlignment="Left" Margin="120,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78" Click="Button_Click_1"/>
         <Button Content="Видалити" HorizontalAlignment="Left" Margin="216,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78" Click="Button_Click"/>
-        <Button Content="Оновити" HorizontalAlignment="Left" Margin="322,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78"/>
-
-
     </Grid>
 </Window>

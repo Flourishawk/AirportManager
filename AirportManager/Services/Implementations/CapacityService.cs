@@ -40,5 +40,11 @@ namespace AirportManager.Services.Implementations
             var allCapacities = db.Capacities.ToList();
             return allCapacities;
         }
+
+        public Capacity GetCapacityById(int capacityId)
+        {
+            using AirportdbContext db = new();
+            return db.Capacities.FirstOrDefault(a => a.CapacityId == capacityId);
+        }
     }
 }

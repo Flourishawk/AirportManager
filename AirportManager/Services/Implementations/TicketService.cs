@@ -44,5 +44,11 @@ namespace AirportManager.Services.Implementations
             var allTickets = db.Tickets.ToList();
             return allTickets;
         }
+
+        public Ticket GetTicketById(int ticketId)
+        {
+            using AirportdbContext db = new();
+            return db.Tickets.FirstOrDefault(a => a.TicketId == ticketId);
+        }
     }
 }

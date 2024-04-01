@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AirportManager.Views" xmlns:viewmodels="clr-namespace:AirportManager.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:EmployeeVM}"
         mc:Ignorable="d"
-        Title="EmployeeView" Height="450" Width="1075">
+        Title="AirportManager" Height="450" Width="1075">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

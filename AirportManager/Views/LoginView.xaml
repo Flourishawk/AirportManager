@@ -30,18 +30,19 @@
                    Grid.Row="0"
                    Margin="0,15"
                    HorizontalAlignment="Left"/>
-            <TextBox  Grid.Column="1"
+            <TextBox x:Name="EmailTextBox" Grid.Column="1"
                   Grid.Row="1"
                   Padding="0,5"
                   Width="255"
                   HorizontalAlignment="Left"
                   Text="{Binding Username, Mode=TwoWay,
                 UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock Text="Password" 
+            <TextBlock Text="Password"
                    Grid.Row="2"
                    Margin="0,15"
-                   HorizontalAlignment="Left"/>
-            <TextBox Grid.Row="3"
+                   HorizontalAlignment="Left" 
+                       />
+            <TextBox x:Name="PasswordTextBox" Grid.Row="3"
                       Text="{Binding Password, Mode=TwoWay, 
                 UpdateSourceTrigger=PropertyChanged}"
                       Padding="0,5"                           

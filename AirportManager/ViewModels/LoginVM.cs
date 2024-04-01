@@ -2,6 +2,7 @@
 using AirportManager.Models;
 using AirportManager.Commands;
 using System.Windows;
+using AirportManager.Services.Implementations;
 
 namespace AirportManager.ViewModels
 {
@@ -39,7 +40,7 @@ namespace AirportManager.ViewModels
 
         private static void LoggedIn(object parameter)
         {
-            MessageBox.Show($"Logged in successfull as {parameter}");
+            
         }
     }
 }

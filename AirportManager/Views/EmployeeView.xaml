@@ -368,8 +368,8 @@
                 </StackPanel>
             </TabItem>
         </TabControl>
-        <Button Content="Пошук за Id" HorizontalAlignment="Left" Margin="26,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78" Click="Button_Click_2"/>
-        <Button Content="Додати" HorizontalAlignment="Left" Margin="120,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78" Click="Button_Click_1"/>
-        <Button Content="Видалити" HorizontalAlignment="Left" Margin="216,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78" Click="Button_Click"/>
+        <Button Foreground="White" Background="Black" Content="Пошук за Id" HorizontalAlignment="Left" Margin="26,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78" Click="Button_Click_2"/>
+        <Button Foreground="White" Background="Black" Content="Додати" HorizontalAlignment="Left" Margin="120,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78" Click="Button_Click_1"/>
+        <Button Foreground="White" Background="Black" Content="Видалити" HorizontalAlignment="Left" Margin="216,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="78" Click="Button_Click"/>
     </Grid>
 </Window>
